@@ -28,10 +28,16 @@ public class AddressBookUtil{
 	*compare method returns sorted firstname
 	*/
 	public static Comparator<Person> sortByFname = new Comparator<Person>(){
-		public int compare(Person a, Person b){
-			return (a.firstname).compareTo(b.firstname);
-		}
-	};
+                public int compare(Person a, Person b){
+                        int flag = (a.firstname).compareTo(b.firstname);
+                        if(flag == 0){
+                                return (a.lastname).compareTo(b.lastname);
+                        }
+                        else{
+                                return flag;
+                        }
+                }
+        };
 
 	/**
 	*anonymous class
@@ -40,7 +46,13 @@ public class AddressBookUtil{
 	*/
 	public static Comparator<Person> sortByLname = new Comparator<Person>(){
                 public int compare(Person a, Person b){
-                        return (a.lastname).compareTo(b.lastname);
+                        int flag = (a.lastname).compareTo(b.lastname);
+                        if(flag == 0){
+                                return (a.firstname).compareTo(b.firstname);
+                        }
+                        else{
+                                return flag;
+                        }
                 }
         };
 
@@ -51,7 +63,13 @@ public class AddressBookUtil{
 	*/
 	public static Comparator<Person> sortByZip = new Comparator<Person>(){
                 public int compare(Person a, Person b){
-                        return a.zip-b.zip;
+                        int flag = a.zip-b.zip;
+                        if(flag == 0){
+                                return (a.firstname).compareTo(b.firstname);
+                        }
+                        else{
+                                return flag;
+                        }
                 }
         };
 
