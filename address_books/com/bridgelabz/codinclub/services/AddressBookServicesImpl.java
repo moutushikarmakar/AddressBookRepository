@@ -10,42 +10,81 @@ import java.util.*;
 import java.io.*;
 import java.lang.*;
 
+/**
+*Address Book Services Implementation class
+*Implementation class of Address Book Services Interface
+*@authour Moutusi Karmakar
+*/
 public class AddressBookServicesImpl implements AddressBookServices{
-	public int ID = 0;
+	public final int ID = 0;
 	Scanner scanner = new Scanner(System.in);
+	
+	/**
+	*Implementation of addPerson method
+	*addPerson methods adds contact to the Address Book
+	*@param addPersonList
+	*/
 	public void addPerson(ArrayList<Person> addPersonList){
+		/**
+		*variable ID is incremnted each time a contact is added in the Address Book 
+		*unique ID for each contact of Address Book
+		*/
 		ID++;
 		System.out.println("Enter details of the person----->");
+		
 		System.out.println("Firstname: ");
-	 	String firstname = scanner.next();
+	 	public final String firstname = scanner.next();
 		scanner.nextLine();
+		
 		System.out.println("Lastname: ");
-        	String lastname = scanner.next();
+        	public final String lastname = scanner.next();
 		scanner.nextLine();
+		
 		System.out.println("Address: ");
-        	String address = scanner.next();
+        	public final String address = scanner.next();
 		scanner.nextLine();
+		
 		System.out.println("City: ");
-        	String city = scanner.next();
+        	public final String city = scanner.next();
 		scanner.nextLine();
+		
 		System.out.println("State: ");
-        	String state = scanner.next();
+        	public final String state = scanner.next();
 		scanner.nextLine();
+		
 		System.out.println("Zip: ");
-        	int zip  = scanner.nextInt();
+        	public final int zip  = scanner.nextInt();
 		scanner.nextLine();
+		
 		System.out.println("Phone Number: ");
-        	long phoneNum = scanner.nextLong();
-
+        	public final long phoneNum = scanner.nextLong();
+		
+		/**
+		*creating an object of class Person and passing the attributes of the contact in the Person class constructor
+		*/
 		Person personObj = new Person(ID, firstname, lastname, address, city, state, zip, phoneNum);
 		AddressBookRepo repo = new AddressBookRepo();
+		/**
+		*adding contact to Address Book CSV file
+		*/
 		repo.addToAddressBook(personObj,addPersonList);
 	}
-
+	
+	/**
+	*Implementation of editContact method
+	*editContact method updates the Address Book
+	*@param editPersonList
+	*/
 	public ArrayList<Person> editContact(ArrayList<Person> editPersonList){
+		/**
+		*view the full Address Book
+		*/
 		AddressBookFileOperations.readFile();
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Enter The ID in which you want to modify: ");
+		/**
+		*asks user to input ID of the contact that needs to be updated
+		*/
+		System.out.println("Enter The ID of the contact you want to modify: ");
 		int id = scan.nextInt();
 		System.out.println("Enter the attribute you want to modify: ");
 		System.out.println("1. Lastname");
@@ -55,6 +94,10 @@ public class AddressBookServicesImpl implements AddressBookServices{
 		System.out.println("5. Zip");
 		System.out.println("6. Phone Number");
 		int attr = scan.nextInt();
+		/**
+		*asks user to enter the modified value for the selected attribute
+		*updates the address book with the modified contact
+		*/
 		switch(attr){
 		case 1:
 			System.out.println("Enter new Lastname: ");
@@ -125,14 +168,28 @@ public class AddressBookServicesImpl implements AddressBookServices{
 		break;
 		}
 		AddressBookRepo repo = new AddressBookRepo();
+		/**
+		*writing in Address Book CSV file
+		*/
 		repo.updateToAddressBook(editPersonList);
 		return editPersonList;
 	}
 
+	/**
+	*implementation of viewContact method
+	*views the contact according to firstname
+	*@param viewPersonList 
+	*/
 	public void viewContact(ArrayList<Person> viewPersonList){
+		/**
+		*asks user to enter the firstname of the contact that needs to be viewed
+		*/
 		System.out.println("Enter first name...");
 		Scanner sc = new Scanner(System.in);
 		String name = sc.nextLine();
+		/**
+		*iterates through the list and displays the required contact
+		*/
 		for(Person p : viewPersonList){
 			if((p.firstname).equalsIgnoreCase(name)){
 				System.out.println("------------------------------");
@@ -141,11 +198,25 @@ public class AddressBookServicesImpl implements AddressBookServices{
 			}
 		}
 	}
-
+	
+	/**
+	*implementation of deleteContact method
+	*deletes the contact and updates in the address book
+	*@param deletePersonList
+	*/
 	public ArrayList<Person> deleteContact(ArrayList<Person> deletePersonList){
+		/**
+		*displaying the address book
+		*/
 		AddressBookFileOperations.readFile();
+		/**
+		*asks user to enter the ID of the contact that needs to be deleted
+		*/
 		System.out.println("Enter the ID of the contact you want to delete: ");
 		int id = AddressBookUtil.getUserInput();
+		/**
+		*iterates through the address book and deletes the selected contact
+		*/
 		for(Person p : deletePersonList){
 			if(p.ID == id){
 				deletePersonList.remove(p);
@@ -153,12 +224,23 @@ public class AddressBookServicesImpl implements AddressBookServices{
 			}
 		}
 		AddressBookRepo repo = new AddressBookRepo();
+		/**
+		*writing updated address book to CSV file
+		*/
 		repo.deleteFromAddressBook(deletePersonList);
 		return deletePersonList;
 	}
 
+	/**
+	*implementation of the sortContact method
+	*sorts the address book according to selected attribute 
+	*@param sortPersonList
+	*/
 	public ArrayList<Person> sortContact(ArrayList<Person> sortPersonList){
 		Scanner sort = new Scanner(System.in);
+		/**
+		*asks user to enter the attributes according to which the sorting needs to be done
+		*/
 		System.out.println("By which parameter do you want to sort?");
 		System.out.println("1. Firstname \n2. Lastname \n3.Zip Code");
 		int select = AddressBookUtil.getUserInput();
@@ -186,6 +268,9 @@ public class AddressBookServicesImpl implements AddressBookServices{
 		break;
 		}
 		AddressBookRepo repo = new AddressBookRepo();
+		/**
+		*writing the sorted address book to the CSV file
+		*/
 		repo.sortAddressBook(sortPersonList);
 		return sortPersonList;
 	}
