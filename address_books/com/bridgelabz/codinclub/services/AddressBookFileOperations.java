@@ -12,9 +12,20 @@ import com.bridgelabz.codinclub.services.AddressBookServicesImpl;
 import com.bridgelabz.codinclub.models.Person;
 import java.util.*;
 
+/**
+*Address Book File Operations class
+*@author Moutusi Karmakar
+*/
 public class AddressBookFileOperations{
-
-final static String CSV_READER = "ID, First Name, Last Name, Address, City, State, Zip, Phone Number";
+	/**
+	*Initializing the header of the CSV file
+	*/
+	final static String CSV_READER = "ID, First Name, Last Name, Address, City, State, Zip, Phone Number";
+	
+	/**
+	*writeFile method writes the arraylist of contacts to a CSV file
+	*@param personList
+	*/
 	public static void writeFile(ArrayList personList){
 		FileWriter fileWriter = null;
 		try{
@@ -40,13 +51,20 @@ final static String CSV_READER = "ID, First Name, Last Name, Address, City, Stat
                                         }
                                 }
         }
-
+	
+	/**
+	*method readFile reads the data from the CSV to arraylist
+	*/
 	public static void readFile(){
 		BufferedReader reader = null;
 		try{
 		String readFile;
 		reader = new BufferedReader(new FileReader("AddressBook.csv"));
 		while((readFile = reader.readLine()) != null){
+			/**
+			*calling the convertArrayList method to display each line read from the CSV file
+			*passing readFile string to convertArrayList method
+			*/
 			System.out.println(convertArrayList(readFile));
                 	}
 		System.out.println("Successfully read file!");
@@ -62,7 +80,12 @@ final static String CSV_READER = "ID, First Name, Last Name, Address, City, Stat
 				}
 		}
 	}
-
+	
+	/**
+	*convertArrayList method takes a string, splits the data and stores in an arraylist
+	*returns arraylist of each contact of the address book
+	*@param list (String)
+	*/
 	public static ArrayList<String> convertArrayList(String list){
 		ArrayList<String> result = new ArrayList<>();
 		if(list != null){
