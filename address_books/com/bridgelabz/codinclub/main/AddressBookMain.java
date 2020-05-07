@@ -14,6 +14,7 @@ import java.util.*;
 */
 public class AddressBookMain{
 	public static void main(String args[]){
+		System.out.println("------------------WELCOME TO ADDRESS BOOK------------------")
 		/**
 		*Class AddressBookServicesImpl implements the AddressBookServices Interface
 		*creating an arraylist 'personList' that stores each record of the address book
