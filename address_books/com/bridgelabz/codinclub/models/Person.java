@@ -6,6 +6,10 @@ import com.bridgelabz.codinclub.services.AddressBookServicesImpl;
 import com.bridgelabz.codinclub.models.Person;
 import com.bridgelabz.codinclub.services.AddressBookFileOperations;
 
+/**
+*Person class
+*@author Moutusi Karmakar
+*/
 public class Person{
 	public int ID;
 	public String firstname;
@@ -16,10 +20,23 @@ public class Person{
 	public int zip;
 	public long phoneNum;
 
+	/**
+	*Default Contructor of Person class
+	*/
 	public Person(){
 
 	}
-
+	
+	/**
+	*Parameterized constructor of Person class
+	*@param firstname
+	*@param lastname
+	*@param address
+	*@param city
+	*@param state
+	*@param zip
+	*@param phoneNum
+	*/
 	public Person(int ID, String firstname, String lastname, String address, String city, String state, int zip, long phoneNum){
 		this.ID = ID;
 		this.firstname = firstname;
@@ -30,32 +47,10 @@ public class Person{
 		this.zip = zip;
 		this.phoneNum = phoneNum;
 	}
+	/**
+	*toString method to print the fields of the Person class
+	*/
 	public String toString(){
 		return ID+","+firstname+","+lastname+","+address+","+city+","+state+","+zip+","+phoneNum;
-	}
-
-	public void setID(int ID){
-		this.ID = ID;
-	}
-	public void setFirstName(String firstname){
-		this.firstname = firstname;
-	}
-	public void setLastName(String lastname){
-		this.lastname = lastname;
-	}
-	public void setAddress(String address){
-		this.address = address;
-	}
-	public void setCity(String city){
-		this.city = city;
-	}
-	public void setState(String state){
-		this.state = state;
-	}
-	public void setZip(int zip){
-		this.zip = zip;
-	}
-	public void setPhone(long phoneNum){
-		this.phoneNum = phoneNum;
 	}
 }
